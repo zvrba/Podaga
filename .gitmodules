@@ -4,6 +4,3 @@
 [submodule "Docs"]
 	path = Docs
 	url = https://github.com/zvrba/Podaga-Docs
-[submodule "Podaga-Docs"]
-	path = Podaga-Docs
-	url = https://github.com/zvrba/Podaga-Docs
