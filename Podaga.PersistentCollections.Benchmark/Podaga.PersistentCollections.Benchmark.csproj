@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pfm.Collections\Podaga.PersistentCollections.csproj" />
+    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.PersistentCollections.csproj" />
   </ItemGroup>
 
-  <Import Project="..\IntTree\IntTree.projitems" Label="Shared" />
+  <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />
 
 </Project>

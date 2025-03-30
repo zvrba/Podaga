@@ -9,10 +9,10 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Pfm.Collections\Podaga.PersistentCollections.csproj" />
-  </ItemGroup>
+  <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />
 
-  <Import Project="..\IntTree\IntTree.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.PersistentCollections.csproj" />
+  </ItemGroup>
 
 </Project>

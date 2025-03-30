@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections", "Pfm.Collections\Podaga.PersistentCollections.csproj", "{CB9BABB5-E424-4153-8BAD-0C97E3B729E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections", "Podaga.PersistentCollections\Podaga.PersistentCollections.csproj", "{CB9BABB5-E424-4153-8BAD-0C97E3B729E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections.Test", "Pfm.Test\Podaga.PersistentCollections.Test.csproj", "{42435E95-47B3-4D37-ACAD-562EBCA8AFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections.Test", "Podaga.PersistentCollections.Test\Podaga.PersistentCollections.Test.csproj", "{42435E95-47B3-4D37-ACAD-562EBCA8AFCB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections.Benchmark", "Pfm.Benchmark\Podaga.PersistentCollections.Benchmark.csproj", "{6D3EB6BB-1EE6-4A27-B7D9-6F3926A3F735}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Podaga.PersistentCollections.Benchmark", "Podaga.PersistentCollections.Benchmark\Podaga.PersistentCollections.Benchmark.csproj", "{6D3EB6BB-1EE6-4A27-B7D9-6F3926A3F735}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2DA3FE0C-E4A3-43F2-9C14-A8294AF3DD91}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Podaga.PersistentCollections,.Shared", "IntTree\Podaga.PersistentCollections,.Shared.shproj", "{BECB907A-6B35-4C7D-9E19-0A80F3C57B6A}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Podaga.PersistentCollections.Shared", "Podaga.PersistentCollections.Shared\Podaga.PersistentCollections.Shared.shproj", "{BECB907A-6B35-4C7D-9E19-0A80F3C57B6A}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SBDOC", "Docs\SBDOC\SBDOC.shfbproj", "{E01F5286-2399-41EB-ACC0-BC7AAC27743C}"
 EndProject
@@ -63,8 +63,8 @@ Global
 		SolutionGuid = {60F3A989-05F5-4651-8E54-077E428A915D}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		IntTree\IntTree.projitems*{42435e95-47b3-4d37-acad-562ebca8afcb}*SharedItemsImports = 5
-		IntTree\IntTree.projitems*{6d3eb6bb-1ee6-4a27-b7d9-6f3926a3f735}*SharedItemsImports = 5
-		IntTree\IntTree.projitems*{becb907a-6b35-4c7d-9e19-0a80f3c57b6a}*SharedItemsImports = 13
+		Podaga.PersistentCollections.Shared\IntTree.projitems*{42435e95-47b3-4d37-acad-562ebca8afcb}*SharedItemsImports = 5
+		Podaga.PersistentCollections.Shared\IntTree.projitems*{6d3eb6bb-1ee6-4a27-b7d9-6f3926a3f735}*SharedItemsImports = 5
+		Podaga.PersistentCollections.Shared\IntTree.projitems*{becb907a-6b35-4c7d-9e19-0a80f3c57b6a}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
