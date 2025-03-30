@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Welcome to Podaga library collection</title><meta name="Title" content="Welcome to Podaga library collection" /><meta name="Help.Id" content="e165bf08-271a-48ee-a361-c437960f8c68" /><meta name="Help.ContentType" content="Concepts" /><meta name="guid" content="e165bf08-271a-48ee-a361-c437960f8c68" /><meta name="Description" content="Podaga is a collection of libraries that I made while exploring various concepts. Use the navigation bar to explore individual libraries." /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Podaga libraries</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Welcome to Podaga library collection</h1><div><p>
+        Podaga is a collection of libraries that I made while exploring various concepts.
+        Use the navigation bar to explore individual libraries.
+			</p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Getting started</h2><div id="IDBABSection"><p>
+					Install the library's NuGet package and read its introductory documentation.  The assemblies use strong-signing in order
+          to avoid that someone else uses <strong>Podaga</strong> namespace for nefarious purposes.  I keep a copy of the
+          signing key securely stored and can prove ownership.  The key is not necessary for building the code on your own, but
+          you will not be able to sign the assemblies.
+        </p><p><span class="code">Docs</span> directory is a submodule pointing to a private repository where I maintain the source code
+          for documentation.  You do not need to check it out to build the libraries.
+        </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Computer source code license</h2><div id="IDCABSection"><p>
+          Files in the following directories:
+        </p><ul class="noBullet"><li><p><span class="code">Podaga.PersistentCollections</span></p></li><li><p><span class="code">Podaga.PersistentCollections.Test</span></p></li><li><p><span class="code">Podaga.PersistentCollections.Benchmark</span></p></li><li><p><span class="code">Podaga.PersistentCollections.Shared</span></p></li></ul><p>
+          are covered by <strong>MPL-2.0 License</strong><br />
+          Copyright (c) 2025 Stian Z. Vrba
+        </p><p>
+          This Source Code Form is subject to the terms of the Mozilla Public
+          License, v. 2.0. If a copy of the MPL was not distributed with this
+          file, You can obtain one
+          <a href="https://mozilla.org/MPL/2.0/" target="_blank" rel="noopener noreferrer">here.</a></p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Documentation license</h2><div id="IDDABSection"><p>
+          The documentation (all content in <span class="code">docs</span> branch) is licensed under
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 4.0</a>
+          license.
+        </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Version history</h2><div id="IDEABSection"><dl><dt>2025-06-01</dt><dd><p>Initial release.</p></dd></dl></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Getting started</a></li><li><a class="quickLink">Computer source code license</a></li><li><a class="quickLink">Documentation license</a></li><li><a class="quickLink">Version history</a></li></ul></nav></div></div></div></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+});</script></body></html>
