@@ -165,7 +165,7 @@ internal class TreeSet_BasicTest<TTree> where TTree : struct, ITreeTraits<int>
         VerifyIteration(iterator, true, contents.Reverse());
     }
 
-    private void VerifyOrder(JoinableTreeNode<int> node, out int count, int min, int max) {
+    private static void VerifyOrder(JoinableTreeNode<int> node, out int count, int min, int max) {
         if (node == null) {
             count = 0;
             return;
