@@ -20,6 +20,8 @@ cb5f818f4d8bcba377505ee3ee217e50f4c0016eaeac1918cb99d472e3003542f23ab1e76f4783
 Public key token is 33475ebbe7618e8b
 ```
 
+There are no separate symbols packages because the assemblies are build with `<DebugType>embedded</DebugType>`.
+
 ## About source code
 
 All code in `main` branch is licensed under [MPL-2.0](LICENSE).

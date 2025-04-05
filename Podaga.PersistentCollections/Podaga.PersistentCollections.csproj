@@ -32,6 +32,8 @@ Introductory and API documentation is available at https://zvrba.github.io/Podag
     <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
     <PackageTags>binary-trees;algorithms;data-structures;avl;weight-balanced;searching;sorting;persistent;immutable;collection</PackageTags>
     <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
