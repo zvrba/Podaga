@@ -1,16 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <!-- TODO: Remove when retargeted to net7.0 -->
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Title>Podaga persistent collections</Title>
     <Platforms>AnyCPU;x64</Platforms>
     <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Podaga - PersistentCollections</Title>
+    <Authors>Stian Z. Vrba (zvrba)</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>    
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\PodagaSigningKey.snk</AssemblyOriginatorKeyFile>
+    <Product>Podaga</Product>
+    <Description>This library includes a simple persistent vector and an extensible persistent binary tree framework.
+The tree framework provides AVL and weight-balanced trees out of the box, adapters to standard collection interfaces (IReadOnlyList, ISet, IReadOnlySet, IDictionary), and supports user-defined augmentations. A built-in augmentation is indexed element access in sorted order.
+By using a novel(?) persistence strategy, it achieves much better performance than standard immutable collections, and only slightly worse than standard SortedSet.
+Introductory and API documentation is available at https://zvrba.github.io/Podaga/html/e165bf08-271a-48ee-a361-c437960f8c68.htm</Description>
+    <Copyright>(c) 2025 Stian Z. Vrba</Copyright>
+    <PackageProjectUrl>https://github.com/zvrba/Podaga</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
+    <PackageTags>binary-trees;algorithms;data-structures;avl;weight-balanced;searching;sorting;persistent;immutable;collection</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
 </Project>
