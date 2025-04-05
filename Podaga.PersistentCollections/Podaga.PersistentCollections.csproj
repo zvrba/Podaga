@@ -10,5 +10,7 @@
     <Title>Podaga persistent collections</Title>
     <Platforms>AnyCPU;x64</Platforms>
     <DebugType>embedded</DebugType>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\PodagaSigningKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 </Project>

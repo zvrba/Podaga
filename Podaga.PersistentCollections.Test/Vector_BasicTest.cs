@@ -32,7 +32,7 @@ internal class Vector_BasicTest
     }
 
     void A_FillLevel1() {
-        Assert.True(v._Root.Link.All(x => x.IsNull));
+        Assert.True(v.Root.Link.All(x => x.IsNull));
 
         for (int i = 0; i < l1Size; ++i) {
             v.Push(i);
@@ -40,7 +40,7 @@ internal class Vector_BasicTest
             Assert.True(v[i] == i);
         }
         Assert.True(v.Count == l1Size);
-        Assert.True(v._Shift == v.Parameters.EShift);
+        Assert.True(v.Shift == v.Parameters.EShift);
     }
 
     void B_GrowRoot() {
@@ -50,7 +50,7 @@ internal class Vector_BasicTest
             Assert.True(v[i] == i);
         }
         Assert.True(v.Count == l2Size);
-        Assert.True(v._Shift == v.Parameters.IShift + v.Parameters.EShift);
+        Assert.True(v.Shift == v.Parameters.IShift + v.Parameters.EShift);
     }
 
     void C_Increment() {
@@ -68,8 +68,8 @@ internal class Vector_BasicTest
         }
 
         Assert.True(v.Count == 0);
-        Assert.True(v._Shift == v.Parameters.EShift);
-        Assert.True(v._Root.Link.All(x => x.IsNull));
+        Assert.True(v.Shift == v.Parameters.EShift);
+        Assert.True(v.Root.Link.All(x => x.IsNull));
         Assert.True(!v.TryPop(out var _));
     }
 }

@@ -19,10 +19,20 @@ public partial class Vector<T>
     public ulong Transient => _Transient;
     private ulong _Transient;
 
-    internal Node _Root;
-    internal Node _Tail;
-    internal int _Shift; // Levels below the root so that (index >> Shift) & IMask is the correct root slot.
+    /// <summary>
+    /// The current tree root.
+    /// </summary>
+    public Node Root;
 
+    /// <summary>
+    /// The "tail" node, used to optimize push/pop.  This node is empty only when the trie is empty.
+    /// </summary>
+    public Node Tail;
+
+    /// <summary>
+    /// Levels below the root so that <c>(index >> Shift) &amp; IMask</c> is the correct root slot.
+    /// </summary>
+    public int Shift;
 
     /// <summary>
     /// Number of elements in the vector.
@@ -39,8 +49,6 @@ public partial class Vector<T>
         set => Set(index, value);
     }
 
-    // INVARIANT: The tail is never empty, except when the trie is empty.
-
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -48,17 +56,17 @@ public partial class Vector<T>
     public Vector(VectorParameters parameters) {
         Parameters = parameters;
         _Transient = TransientSource.NewTransient();
-        _Root = CreateLink();
-        _Tail = CreateLeaf();
-        _Shift = Parameters.EShift;
+        Root = CreateLink();
+        Tail = CreateLeaf();
+        Shift = Parameters.EShift;
     }
 
     private Vector(Vector<T> other) {
         Parameters = other.Parameters;
         _Transient = TransientSource.NewTransient();
-        _Root = other._Root;
-        _Tail = other._Tail;
-        _Shift = other._Shift;
+        Root = other.Root;
+        Tail = other.Tail;
+        Shift = other.Shift;
         Count = other.Count;
     }
 
@@ -82,10 +90,10 @@ public partial class Vector<T>
     private T Get(int index) {
         CheckIndex(index);
 
-        ref Node node = ref _Tail;
+        ref Node node = ref Tail;
         if (index < ((Count - 1) & ~Parameters.EMask)) {
-            node = ref _Root;
-            for (var shift = this._Shift; shift >= Parameters.EShift; shift -= Parameters.IShift)
+            node = ref Root;
+            for (var shift = this.Shift; shift >= Parameters.EShift; shift -= Parameters.IShift)
                 node = ref node.Link[(index >> shift) & Parameters.IMask];
         }
         
@@ -95,11 +103,11 @@ public partial class Vector<T>
     private void Set(int index, T element) {
         CheckIndex(index);
 
-        ref Node node = ref _Tail;
+        ref Node node = ref Tail;
         if (index < ((Count - 1) & ~Parameters.EMask)) {
             //ret.Root = ret.Clone(Root);
-            node = ref _Root;
-            for (var shift = _Shift; shift >= Parameters.EShift; shift -= Parameters.IShift) {
+            node = ref Root;
+            for (var shift = Shift; shift >= Parameters.EShift; shift -= Parameters.IShift) {
                 node = node.Clone(Transient);
                 node = ref node.Link[(index >> shift) & Parameters.IMask];
             }
@@ -119,29 +127,29 @@ public partial class Vector<T>
                 PushTail();
         }
         else {
-            _Tail = _Tail.Clone(Transient);
+            Tail = Tail.Clone(Transient);
         }
 
-        _Tail.Value[Count & Parameters.EMask] = element;
+        Tail.Value[Count & Parameters.EMask] = element;
         ++Count;
     }
 
     private void PushTail() {
-        if (Count > 1 << (_Shift + Parameters.IShift)) {
+        if (Count > 1 << (Shift + Parameters.IShift)) {
             var newroot = CreateLink();
-            newroot.Link[0] = _Root;
-            _Root = newroot;
-            _Shift += Parameters.IShift;
+            newroot.Link[0] = Root;
+            Root = newroot;
+            Shift += Parameters.IShift;
         }
-        DoPush(ref _Root, _Shift);
-        _Tail = CreateLeaf();
+        DoPush(ref Root, Shift);
+        Tail = CreateLeaf();
 
         void DoPush(ref Node node, int shift) {
             if (node.IsNull) node = CreateLink();
             else node = node.Clone(Transient);
 
             var islot = ((Count - 1) >> shift) & Parameters.IMask;
-            if (shift <= Parameters.IShift) node.Link[islot] = _Tail;
+            if (shift <= Parameters.IShift) node.Link[islot] = Tail;
             else DoPush(ref node.Link[islot], shift - Parameters.IShift);
         }
     }
@@ -159,25 +167,25 @@ public partial class Vector<T>
             element = default;
             return false;
         }
-        _Tail = _Tail.Clone(Transient);
+        Tail = Tail.Clone(Transient);
         --Count;
-        element = _Tail.Value[Count & Parameters.EMask];
-        _Tail.Value[Count & Parameters.EMask] = default;   // Must have for GC to collect previously referenced data.
+        element = Tail.Value[Count & Parameters.EMask];
+        Tail.Value[Count & Parameters.EMask] = default;   // Must have for GC to collect previously referenced data.
         if ((Count & Parameters.EMask) == 0)
             PopTail();
         return true;
     }
 
     private void PopTail() {
-        DoPop(ref _Root, _Shift);
-        if (_Shift > Parameters.EShift) {
-            if (_Root.Link[1].IsNull) {
-                _Root = _Root.Link[0];
-                _Shift -= Parameters.IShift;
+        DoPop(ref Root, Shift);
+        if (Shift > Parameters.EShift) {
+            if (Root.Link[1].IsNull) {
+                Root = Root.Link[0];
+                Shift -= Parameters.IShift;
             }
         }
-        else if (_Root.IsNull) {
-            _Root = CreateLink();    // TODO: transient.
+        else if (Root.IsNull) {
+            Root = CreateLink();    // TODO: transient.
         }
 
         void DoPop(ref Node node, int shift) {
@@ -185,7 +193,7 @@ public partial class Vector<T>
             node = node.Clone(Transient);
 
             if (shift == Parameters.EShift) {
-                _Tail = node.Link[islot];
+                Tail = node.Link[islot];
                 node.Link[islot] = default;
             }
             else {
