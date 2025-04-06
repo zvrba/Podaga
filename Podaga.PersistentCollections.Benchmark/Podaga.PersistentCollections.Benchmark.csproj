@@ -9,12 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="VectorModifyBenchmark.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.14.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.JoinableTree.csproj" />
+    <ProjectReference Include="..\Podaga.JoinableTree\Podaga.JoinableTree.csproj" />
   </ItemGroup>
 
   <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />

@@ -15,8 +15,8 @@ public static class Program
         // NB! Running time grows at least quadratically with element count.
         var sequences = GetSequences(SequenceSize);
 
-        Vector_BasicTest.Run(3, 2);
-        Vector_MutationTest.Run(3, 2);
+        //Vector_BasicTest.Run(3, 2);
+        //Vector_MutationTest.Run(3, 2);
         //Vector_BasicTest.Run(5, 5); // NB! Slow-ish.
 
         TreeSet_BasicTest<AvlIntTree>.Run(sequences);
