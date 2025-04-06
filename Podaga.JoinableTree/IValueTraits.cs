@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.JoinableTree.Tree;
+namespace Podaga.JoinableTree;
 
 /// <summary>
 /// Any value stored in the tree must implement this interface.

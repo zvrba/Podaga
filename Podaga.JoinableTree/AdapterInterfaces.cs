@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Podaga.JoinableTree.Tree;
+namespace Podaga.JoinableTree;
 
 /// <summary>
 /// Common interface implemented by all adapters to <c>System.Collection.Generic</c> interfaces.

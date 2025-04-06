@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
-using Podaga.JoinableTree.Tree;
 using IntTree;
 
 namespace Podaga.JoinableTree.Benchmark;

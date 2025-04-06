@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.JoinableTree.Tree;
+namespace Podaga.JoinableTree;
 
 /// <summary>
 /// Extension methods on <see cref="JoinableTreeNode{TValue}"/>.  These methods allow to treat any tree node as a

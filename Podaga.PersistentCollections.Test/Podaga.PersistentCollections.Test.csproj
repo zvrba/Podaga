@@ -12,11 +12,6 @@
   <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />
 
   <ItemGroup>
-    <Compile Remove="Vector_BasicTest.cs" />
-    <Compile Remove="Vector_MutationTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Podaga.JoinableTree\Podaga.JoinableTree.csproj" />
   </ItemGroup>
 

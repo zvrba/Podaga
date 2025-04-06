@@ -2,8 +2,6 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Diagnostics.Windows;
-
-using Podaga.JoinableTree.Tree;
 using IntTree;
 
 namespace Podaga.JoinableTree.Benchmark;

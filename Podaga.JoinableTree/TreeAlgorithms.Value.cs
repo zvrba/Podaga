@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace Podaga.JoinableTree.Tree;
+namespace Podaga.JoinableTree;
 
 /// <summary>
 /// This struct is used as input to

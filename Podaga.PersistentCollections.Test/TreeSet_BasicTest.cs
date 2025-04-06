@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Podaga.JoinableTree.Tree;
-
 namespace Podaga.JoinableTree.Test;
 
 internal class TreeSet_BasicTest<TTree> where TTree : struct, ITreeTraits<int>

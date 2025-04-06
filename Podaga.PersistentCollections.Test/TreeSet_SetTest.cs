@@ -1,5 +1,4 @@
 ﻿using System;
-using Podaga.JoinableTree.Tree;
 
 namespace Podaga.JoinableTree.Test;
 
