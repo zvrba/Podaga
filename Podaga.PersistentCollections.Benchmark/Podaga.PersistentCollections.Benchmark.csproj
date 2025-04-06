@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.PersistentCollections.csproj" />
+    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.JoinableTree.csproj" />
   </ItemGroup>
 
   <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />

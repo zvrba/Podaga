@@ -12,7 +12,7 @@
   <Import Project="..\Podaga.PersistentCollections.Shared\IntTree.projitems" Label="Shared" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.PersistentCollections.csproj" />
+    <ProjectReference Include="..\Podaga.PersistentCollections\Podaga.JoinableTree.csproj" />
   </ItemGroup>
 
 </Project>
