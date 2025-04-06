@@ -46,7 +46,7 @@ Introductory and API documentation is available at https://zvrba.github.io/Podag
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe&quot; -Ra $(TargetPath) $(SolutionDir)PodagaSigningKey.snk" />
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe&quot; -Rca $(TargetPath) PodagaKeyContainer" />
   </Target>
   
 </Project>
