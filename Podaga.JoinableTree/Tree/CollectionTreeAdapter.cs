@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// Adapts a joinable tree to <see cref="ICollection{T}"/>.

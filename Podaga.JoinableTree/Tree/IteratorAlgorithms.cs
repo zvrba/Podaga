@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// Traversal methods on <see cref="TreeIterator{TValue}"/>. Every method in

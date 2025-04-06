@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
-using Podaga.PersistentCollections.Tree;
+using Podaga.JoinableTree.Tree;
 using IntTree;
 
-namespace Podaga.PersistentCollections.Benchmark;
+namespace Podaga.JoinableTree.Benchmark;
 
 public class SequencePatternBenchmark
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// Describes a "section" of a tree.

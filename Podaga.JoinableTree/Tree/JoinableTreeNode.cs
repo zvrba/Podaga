@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// Node of a binary search tree; stores a tagged value.

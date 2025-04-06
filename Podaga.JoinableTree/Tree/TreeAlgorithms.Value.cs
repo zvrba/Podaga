@@ -1,13 +1,13 @@
 ﻿#nullable enable
 using System;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// This struct is used as input to
-/// <see cref="TreeAlgorithms.Insert{TValue, TJoin}(Podaga.PersistentCollections.Tree.JoinableTreeNode{TValue}?, ref Podaga.PersistentCollections.Tree.ModifyState{TValue})"/>
+/// <see cref="TreeAlgorithms.Insert{TValue, TJoin}(Podaga.JoinableTree.Tree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.Tree.ModifyState{TValue})"/>
 /// and
-/// <see cref="TreeAlgorithms.Delete{TValue, TJoin}(Podaga.PersistentCollections.Tree.JoinableTreeNode{TValue}?, ref Podaga.PersistentCollections.Tree.ModifyState{TValue})"/>
+/// <see cref="TreeAlgorithms.Delete{TValue, TJoin}(Podaga.JoinableTree.Tree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.Tree.ModifyState{TValue})"/>
 /// methods.
 /// </summary>
 /// <typeparam name="TValue">Tree element type.</typeparam>

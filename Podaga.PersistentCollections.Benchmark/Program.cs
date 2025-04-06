@@ -10,7 +10,7 @@ using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using System.Diagnostics;
 
-namespace Podaga.PersistentCollections.Benchmark;
+namespace Podaga.JoinableTree.Benchmark;
 
 // NOTE: Tree code gets heavy gains from PGO: set DOTNET_TieredPGO=1
 public static class Program

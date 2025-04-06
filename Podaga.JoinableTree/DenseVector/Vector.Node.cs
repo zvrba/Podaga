@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.PersistentCollections.DenseVector;
+namespace Podaga.JoinableTree.DenseVector;
 
 public partial class Vector<T>
 {

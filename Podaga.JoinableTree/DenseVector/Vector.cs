@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.PersistentCollections.DenseVector;
+namespace Podaga.JoinableTree.DenseVector;
 
 /// <summary>
 /// Immutable/transient vector that can also act as a stack.

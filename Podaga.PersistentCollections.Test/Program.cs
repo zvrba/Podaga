@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 using IntTree;
 
-using Podaga.PersistentCollections.Tree;
+using Podaga.JoinableTree.Tree;
 
-namespace Podaga.PersistentCollections.Test;
+namespace Podaga.JoinableTree.Test;
 
 public static class Program
 {

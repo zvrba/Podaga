@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using Podaga.PersistentCollections.Tree;
+using Podaga.JoinableTree.Tree;
 
 namespace IntTree;
 

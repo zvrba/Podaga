@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Podaga.PersistentCollections.Tree;
+namespace Podaga.JoinableTree.Tree;
 
 /// <summary>
 /// Adapts a joinable tree to <see cref="IReadOnlyList{T}"/>.  The collection is nevertheless modifiable

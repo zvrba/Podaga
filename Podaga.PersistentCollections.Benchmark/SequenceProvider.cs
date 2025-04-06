@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Podaga.PersistentCollections.Benchmark;
+namespace Podaga.JoinableTree.Benchmark;
 
 public class SequenceProvider
 {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Podaga.PersistentCollections.Tree;
+using Podaga.JoinableTree.Tree;
 
-namespace Podaga.PersistentCollections.Test;
+namespace Podaga.JoinableTree.Test;
 
 // Tests set operations.  Must be used only with immutable nodes!
 internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>

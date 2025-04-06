@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Podaga.PersistentCollections;
+namespace Podaga.JoinableTree;
 
 /// <summary>
 /// This class is used as a default source of unique transient values throughout this assembly.

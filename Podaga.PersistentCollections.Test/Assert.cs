@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Podaga.PersistentCollections.Test;
+namespace Podaga.JoinableTree.Test;
 
 internal static class Assert
 {

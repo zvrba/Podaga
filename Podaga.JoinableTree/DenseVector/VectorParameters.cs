@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Podaga.PersistentCollections.DenseVector;
+namespace Podaga.JoinableTree.DenseVector;
 
 /// <summary>
 /// Used upon vector creation to set the sizes of internal and external nodes.

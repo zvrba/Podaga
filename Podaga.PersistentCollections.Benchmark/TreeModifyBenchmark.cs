@@ -3,10 +3,10 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Diagnostics.Windows;
 
-using Podaga.PersistentCollections.Tree;
+using Podaga.JoinableTree.Tree;
 using IntTree;
 
-namespace Podaga.PersistentCollections.Benchmark;
+namespace Podaga.JoinableTree.Benchmark;
 
 //[HardwareCounters(HardwareCounter.InstructionRetired, HardwareCounter.CacheMisses, HardwareCounter.BranchInstructions)]
 [MemoryDiagnoser]
