@@ -5,9 +5,9 @@ namespace Podaga.JoinableTree;
 
 /// <summary>
 /// This struct is used as input to
-/// <see cref="TreeAlgorithms.Insert{TValue, TJoin}(Podaga.JoinableTree.Tree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.Tree.ModifyState{TValue})"/>
+/// <see cref="TreeAlgorithms.Insert{TValue, TJoin}(Podaga.JoinableTree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.ModifyState{TValue})"/>
 /// and
-/// <see cref="TreeAlgorithms.Delete{TValue, TJoin}(Podaga.JoinableTree.Tree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.Tree.ModifyState{TValue})"/>
+/// <see cref="TreeAlgorithms.Delete{TValue, TJoin}(Podaga.JoinableTree.JoinableTreeNode{TValue}?, ref Podaga.JoinableTree.ModifyState{TValue})"/>
 /// methods.
 /// </summary>
 /// <typeparam name="TValue">Tree element type.</typeparam>
