@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>Podaga - PersistentCollections</Title>
+    <Title>Podaga - JoinableTree</Title>
     <Authors>Stian Z. Vrba (zvrba)</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -22,8 +22,8 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>D:\Podaga\PodagaSigningKey.pub.snk</AssemblyOriginatorKeyFile>
     <Product>Podaga</Product>
-    <Description>This library includes a simple persistent vector and an extensible persistent binary tree framework.
-The tree framework provides AVL and weight-balanced trees out of the box, adapters to standard collection interfaces (IReadOnlyList, ISet, IReadOnlySet, IDictionary), and supports user-defined augmentations. A built-in augmentation is indexed element access in sorted order.
+    <Description>This library contains an extensible framework for persistent and augmentable binary trees.
+Out of the box,  it provides AVL and weight-balanced trees, adapters to standard collection interfaces (IReadOnlyList, ISet, IReadOnlySet, IDictionary), and indexed access to elements in sort order.
 By using a novel(?) persistence strategy, it achieves much better performance than standard immutable collections, and only slightly worse than standard SortedSet.
 The library also provides a tree iterator, which allows non-recursive tree traversal, as well as traversing only a part of the tree.
 Introductory and API documentation is available at https://zvrba.github.io/Podaga/html/e165bf08-271a-48ee-a361-c437960f8c68.htm</Description>
@@ -31,7 +31,7 @@ Introductory and API documentation is available at https://zvrba.github.io/Podag
     <PackageProjectUrl>https://github.com/zvrba/Podaga</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
-    <PackageTags>binary-trees;algorithms;data-structures;avl;weight-balanced;searching;sorting;persistent;immutable;collection</PackageTags>
+    <PackageTags>tree;binary-tree;algorithms;data-structures;avl;weight-balanced;searching;sorting;persistent;immutable;collection;augmented</PackageTags>
     <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
