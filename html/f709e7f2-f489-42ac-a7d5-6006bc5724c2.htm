@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>SIMD sorting</title><meta name="Title" content="SIMD sorting" /><meta name="Help.Id" content="f709e7f2-f489-42ac-a7d5-6006bc5724c2" /><meta name="Help.ContentType" content="Concepts" /><meta name="guid" content="f709e7f2-f489-42ac-a7d5-6006bc5724c2" /><meta name="Description" content="This article provides guidelines on safe use of Podaga.SimdSort routines. The routines implement a periodic sorting network that sorts arrays of int and float elements. The code runs only on machines supporting AVX2 instruction set." /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Podaga libraries</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>SIMD sorting</h1><div><p>
+        This article provides guidelines on safe use of <strong>Podaga.SimdSort</strong> routines.  The routines implement
+        a periodic sorting network that sorts arrays of <span class="code">int</span> and <span class="code">float</span> elements.
+        The code runs only on machines supporting AVX2 instruction set.
+      </p><p>
+        For basic exposition on sorting networks, see
+      </p><blockquote>
+        D. E. Knuth, The Art of Computer Programming, vol. 3, section 5.3.4.
+      </blockquote><p>
+        The "periodic" network as implemented appears above in exercise 53, but has first been described by
+      </p><blockquote>
+        Dowd et al.: "The Periodic Balanced Sorting Network", JACM Vol. 36, No. 4, October 1989, pp. 738-757.
+      </blockquote></div><h2 id="Section1" class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Getting started</h2><div id="IDDABSection"><p>
+          To create an instance of sorting algorithm, invoke <a href="6aba69c0-ec30-b72d-10a4-ed1344c031df.htm">Create</a>
+          method.  The returned instance will sort correctly any array of up to and including <a href="24c03887-83b9-2fcd-5258-b8912d9e7f7a.htm">MaxLength</a>
+          elements.  The sorting algorithm is specialized to run more efficiently for arrays of up to 8 and 16 elements.  Otherwise, the largest
+          supported length is <span class="code">2^24</span> (about 16M) elements.
+        </p><p>
+          The class exposes two methods for sorting:
+        </p><ul class="noBullet"><li><p><a href="a7475550-fe24-ef38-66d0-608e4ecef3a5.htm">Sort</a>
+              is the "safe" variant which infers the number of elements and checks preconditions, throwing an exception if these are not
+              satisfied.
+            </p><p><a href="a1ebf91a-0bdd-fb14-03d3-c63c6713eb17.htm">Sorter</a> is the underlying unsafe
+              delegate invoked by the "safe" <span class="code">Sort</span> method.  It can be invoked directly from unsafe code to avoid
+              the (small) overhead of checking performed by the "safe" <span class="code">Sort</span> method.
+            </p><article class="message is-warning"><div class="message-header"><p><span class="icon"><i class="fa fa-warning"></i></span>  Caution</p></div><div class="message-body"><p>
+                Invoking the delegate with invalid values <strong>will</strong> result in data corruption and, eventually,
+                hard program crash. ("Undefined behaviour.")  Zero-length arrays are not supported.
+              </p></div></article></li></ul></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Notes about performance</h2><div id="IDEABSection"><p>
+          This project began as an experiment in using AVX2 intrinsics and unsafe code on <strong>netcore3.1</strong> platform.
+          The list below summarizes the main points to consider while writing performance-critical code.  Note that much has changed in
+          .NET platform since the code was originally developed, so some of these points might not be valid anymore.
+        </p><ul class="noBullet"><li><p>
+              Accessing static data has more overhead than accessing instance data: extraneous CALL instructions into the runtime
+              are generated.  My guess is that these ensure thread-safe, once-only static initialization semantics.  This is the
+              reason behind constants being member variables in the concrete classes.
+            </p></li><li><p>
+              Accessing <span class="code">ref</span> parameters generates a lot of load/store instructions.
+              It is much more efficient to load <span class="code">ref</span> parameters into locals at the beginning
+              of the procedure and store results at the end.
+            </p></li></ul><p>
+          Performance results have been obtained on <strong>.NET9</strong> platform and are presented in <strong>IntSort</strong>
+          sheet of the attached Excel workbook.  Points below summarize the main findings.
+        </p><ul class="noBullet"><li><p><strong>BenchmarkDotNet</strong> still (April 2025) does not support "additive baseline",
+              so numbers have been adjusted accordingly wrt. <strong>AdditiveBaseline</strong> benchmark.
+            </p><p>
+              For arrays of "intermediate" size (256 to 1M elements), the speedup is between 1x and 4x.  Peak speedups are achieved
+              between 4k and 64k elements.
+            </p><p>
+              For small arrays (up to 256 elements), the speedup is unpredictable: network sort might be either faster or slower.
+              This is most probably due to high latency of AVX2 masked load and store instructions. (The sorting network uses masked
+              loads/stores to avoid touching data not within the array's bounds when the size is not a power of 2.)
+            </p></li></ul><figure class="mediaNear"><figcaption>IntSort performance results (Left axis: logarithmic, execution time in ns. Right axis (the blue curve): linear, speedup over standard array sort.)</figcaption><img alt="Int Sort Speedup" src="../media/IntSortSpeedup.png" /></figure></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Getting started</a></li><li><a class="quickLink">Notes about performance</a></li></ul></nav></div></div></div></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+});</script></body></html>
