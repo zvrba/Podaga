@@ -1,5 +1,4 @@
 ﻿using System;
-
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Columns;
@@ -8,7 +7,7 @@ using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using System.Diagnostics;
+using Podaga.Benchmark;
 
 namespace Podaga.JoinableTree.Benchmark;
 
@@ -16,9 +15,6 @@ namespace Podaga.JoinableTree.Benchmark;
 public static class Program
 {
     public static void Main() {
-        var p = Process.GetCurrentProcess();
-        p.ProcessorAffinity = 0x02; // Run only on one processor.
-
         System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
         var summaries = BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run();
         Console.WriteLine("Done.");

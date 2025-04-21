@@ -4,6 +4,8 @@ using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Diagnostics.Windows;
 using IntTree;
 
+using Podaga.Benchmark;
+
 namespace Podaga.JoinableTree.Benchmark;
 
 //[HardwareCounters(HardwareCounter.InstructionRetired, HardwareCounter.CacheMisses, HardwareCounter.BranchInstructions)]
@@ -32,6 +34,9 @@ public class TreeModifyBenchmark
     }
 
     #endregion
+
+    [GlobalSetup]
+    public void GlobalSetup() => CoreSelector.SetAffinity();
 
     [Benchmark]
     public void WBTree() {

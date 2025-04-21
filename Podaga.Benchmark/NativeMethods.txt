@@ -1,0 +1,5 @@
+﻿GetLogicalProcessorInformationEx
+SetProcessAffinityMask
+SetThreadAffinityMask
+GetCurrentThread
+WIN32_ERROR

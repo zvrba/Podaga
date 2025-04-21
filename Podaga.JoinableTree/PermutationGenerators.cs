@@ -7,7 +7,10 @@ namespace Podaga.JoinableTree;
 /// </summary>
 public static class PermutationGenerators
 {
-    private static readonly Random random = new Random(3141);
+    /// <summary>
+    /// Source of random numbers used by all methods in this class.
+    /// </summary>
+    public static readonly Random RandomSource = new Random(3141);
 
     /// <summary>
     /// This array contains delegates for all predefined patterns.
@@ -24,7 +27,7 @@ public static class PermutationGenerators
         for (int i = 0; i < a.Length; ++i)
             a[i] = i;
         for (int i = 0; i < a.Length - 1; ++i) {
-            var j = random.Next(i, a.Length);
+            var j = RandomSource.Next(i, a.Length);
             (a[i], a[j]) = (a[j], a[i]);
         }
     }

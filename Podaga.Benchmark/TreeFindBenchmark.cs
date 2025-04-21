@@ -2,6 +2,8 @@
 using BenchmarkDotNet.Attributes;
 using IntTree;
 
+using Podaga.Benchmark;
+
 namespace Podaga.JoinableTree.Benchmark;
 
 //[HardwareCounters(HardwareCounter.InstructionRetired, HardwareCounter.CacheMisses, HardwareCounter.BranchInstructions)]
@@ -42,6 +44,9 @@ public class TreeFindBenchmark
 
     // Try to make sure code doesn't get optimized out.
     public int C = 0;
+
+    [GlobalSetup]
+    public void GlobalSetup() => CoreSelector.SetAffinity();
 
     [Benchmark]
     public void AvlTree() {

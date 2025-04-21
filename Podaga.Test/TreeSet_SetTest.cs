@@ -1,6 +1,7 @@
 ﻿using System;
+using Podaga.JoinableTree;
 
-namespace Podaga.JoinableTree.Test;
+namespace Podaga.Test;
 
 // Tests set operations.  Must be used only with immutable nodes!
 internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>

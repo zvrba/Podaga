@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
+    <DebugType>embedded</DebugType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Podaga - SimdSort</Title>
+    <Authors>Stian Z. Vrba (zvrba)</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>D:\Podaga\PodagaSigningKey.pub.snk</AssemblyOriginatorKeyFile>
+    <Product>Podaga</Product>
+    <Description>
+      This library contains SIMD-accelerated routines for sorting int or float arrays.  The sorting algorithm implements a periodic sorting network.
+      The code uses AVX2 instructions and runs only on x64 architecture.
+      Introductory and API documentation is available at https://zvrba.github.io/Podaga/html/e165bf08-271a-48ee-a361-c437960f8c68.htm
+    </Description>
+    <Copyright>(c) 2025 Stian Z. Vrba</Copyright>
+    <PackageProjectUrl>https://github.com/zvrba/Podaga</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
+    <PackageTags>sorting;simd;algorithms;parallel</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+    <DelaySign>True</DelaySign>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe&quot; -Rca $(TargetPath) PodagaKeyContainer" />
+  </Target>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
