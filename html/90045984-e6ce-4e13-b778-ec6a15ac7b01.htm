@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Joinable tree framework</title><meta name="Title" content="Joinable tree framework" /><meta name="Help.Id" content="90045984-e6ce-4e13-b778-ec6a15ac7b01" /><meta name="Help.ContentType" content="Concepts" /><meta name="guid" content="90045984-e6ce-4e13-b778-ec6a15ac7b01" /><meta name="Description" content="This library provides a framework for working with augmentable binary trees. Being a framework, users are free to write their own algorithms that interoperate with the existing algorithms and data structures." /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Podaga libraries</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Joinable tree framework</h1><div><p>
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Joinable tree framework</title><meta name="Title" content="Joinable tree framework" /><meta name="Help.Id" content="90045984-e6ce-4e13-b778-ec6a15ac7b01" /><meta name="Help.ContentType" content="Concepts" /><meta name="guid" content="90045984-e6ce-4e13-b778-ec6a15ac7b01" /><meta name="Description" content="This library provides a framework for working with augmentable binary trees. Being a framework, users are free to write their own algorithms that interoperate with the existing algorithms and data structures." /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Podaga libraries</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Joinable tree framework</h1><div><p class="is-hidden-tablet">This topic contains the following sections:</p><ul class="is-hidden-tablet"><li>Introduction to persistent data structures</li><li>Introduction to augmented search trees</li><li>Framework features</li><li>Quick start</li></ul><p>
         This library provides a framework for working with augmentable binary trees.  Being a framework, users are free to write
         their own algorithms that interoperate with the existing algorithms and data structures.  By supporting arbitrary
         "value augmentations", the framework can be used to implement more "advanced" structures, such as interval trees without
@@ -14,60 +14,73 @@
       </blockquote><p>
         The current version does not exploit the possibility of parallelization.
       </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Introduction to persistent data structures</h2><div id="IDDABSection"><p>
-          A persistent data structure preserves its previous versions upon modifications.  As such, they are easier to use in multi-threaded
-          scenarios where modifications by one thread must not affect other threads' view of the data.  The
+          A persistent data structure preserves its previous versions upon every modification; an example is
+          <a href="https://learn.microsoft.com/dotnet/api/system.collections.immutable.immutablesortedset-1" target="_blank" rel="noopener noreferrer">ImmutableSortedSet<span id="LST1841A9A1_2" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_3" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+          As such, they are easier to use in multi-threaded scenarios where modifications by one thread must not affect
+          other threads' view of the data.  The downside of persistence is increased memory pressure and negative
+          performance impact.
           <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank" rel="noopener noreferrer">Wikipedia article</a>
           provides extensive background with further references.
         </p><p>
           Because most developers are used to the convenience of ordinary mutable data structures (e.g., <span class="code">List&lt;T&gt;</span>),
-          this library introduces the concept of <em>forking</em>.  The collections behave as ordinary mutable collections,
-          but forking creates an independent "copy" of the original collection such that modifications to one are invisible to the other.
+          this library introduces the concept of <em>cloning</em>.  The joinable collections behave as ordinary mutable collections,
+          but cloning creates independent "copies" of the original collection such that modifications to one are invisible to the other.
         </p><article class="message is-info"><div class="message-header"><p><span class="icon"><i class="fa fa-info-circle"></i></span>  Note</p></div><div class="message-body"><p>
-            Forking is <em>cheap</em>: only a fresh collection object is created whereas the actual data is copied lazily upon
-            mdification of the collection.  In operating systems, this is also known as <em>copy-on-write</em> semantics which
-            enables space-efficient sharing of memory pages.
+            Cloning is <em>cheap</em>: only a fresh collection object is created whereas the actual data is copied lazily upon
+            mdification of either the original or the cloned collection.  In operating systems, this is also known as
+            <em>copy-on-write</em> semantics which enables space-efficient sharing of memory pages.
           </p></div></article><p>
-          The collections consint internally of nodes which always carry a <em>transient tag</em> which is a unique 64-bit integer.
+          The collections consint internally of nodes which always carry a <em>transient tag</em> which is a unique instance
+          of <a href="2b3abad8-b773-065a-24c2-06bd9497d693.htm">TreeJoin<span id="LST1841A9A1_4" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_5" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
           The transient tag is also attached to the collection itself so that it knows which nodes must be physically copied before their
-          contents is modified.  Generation of transient tags is handled by methods on <a href="d4b9b0b2-5dab-3096-b713-3d5e7b7a300b.htm">TransientSource</a>
-          class.
-        </p><blockquote>
-          Transient tag provides a unique identity for the node and most papers use <span class="code">object</span> instance for the transient tag.
-          In .NET however, reference assignment invokes <span class="code">CORINFO_HELP_ASSIGN_REF</span> method which ensures proper GC tracking
-          and is thus slower than using <span class="code">ulong</span>.
-        </blockquote><p>
+          contents is modified.
+        </p><p>
           The library is delivered with a test suite that tests correctness using all combinations of predefined add/remove patterns (<a href="c2ff77d5-167c-7b00-35b6-7ef44fb4f7b0.htm">PermutationGenerators</a>).
         </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Introduction to augmented search trees</h2><div id="IDEABSection"><p>
           This framework allows the value type to be partitioned into two parts: an <em>immutable</em> key part and a <em>mutable</em>
-          augmentation part.  For correct operation, the augmentation part must form a monoid.
+          augmentation part.  For correct operation, the augmentation part must form a monoid and the key part must not be modified after
+          when the node is a member of a tree.
         </p><p>
           The framework provides a size augmentation out of the box, which enables efficient (logarithmic) indexed access to elements in sorted order.
         </p><p>
           A longer introduction to augmented data structures may be found in CLRS "Introduction to algorithms".  Short lecture notes
           are also available, for example,
           <a href="https://courses.cs.duke.edu/cps130/summer02/Lectures/L13.pdf" target="_blank" rel="noopener noreferrer">here.</a></p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Framework features</h2><div id="IDFABSection"><p>
-          The tree framework is somewhat more involved to use than <span class="code">SortedSet</span>; see the sample.
-          It provides the following fetures out of the box:
-        </p><ul><li><p>AVL and weight-balanced trees.</p></li><li><p>On-demand persistence through forking.</p></li><li><p>
+          The tree framework provides the following fetures out of the box:
+        </p><ul><li><p>AVL and weight-balanced trees.</p></li><li><p>
+              Automatic adaptation of <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icomparer-1" target="_blank" rel="noopener noreferrer">IComparer<span id="LST1841A9A1_6" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_7" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+              to <a href="51b79ace-1fc8-afc5-eeb0-11bb1f0ba1df.htm">ITaggedValueComparer<span id="LST1841A9A1_8" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_9" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a> for
+              easier interoperability with existing collections.
+            </p></li><li><p>On-demand persistence through cloning.</p></li><li><p>
               User-provided monoidal augmentations (useful for implementing, e.g., interval trees).  Indexing augmentation, i.e.,
               logarithmic element access by index in sorted order is built-in.
             </p></li><li><p>
               Adapters to standard interfaces:
-              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1" target="_blank" rel="noopener noreferrer">ICollection<span id="LST1841A9A1_2" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_3" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
-              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1" target="_blank" rel="noopener noreferrer">IReadOnlyList<span id="LST1841A9A1_4" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_5" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
-              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1" target="_blank" rel="noopener noreferrer">ISet<span id="LST1841A9A1_6" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_7" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
-              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2" target="_blank" rel="noopener noreferrer">IDictionary<span id="LST1841A9A1_8" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TKey, TValue<span id="LST1841A9A1_9" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1" target="_blank" rel="noopener noreferrer">ICollection<span id="LST1841A9A1_10" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_11" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
+              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1" target="_blank" rel="noopener noreferrer">IReadOnlyList<span id="LST1841A9A1_12" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_13" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a> (indexing
+              in sort order),
+              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1" target="_blank" rel="noopener noreferrer">ISet<span id="LST1841A9A1_14" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_15" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
+              <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2" target="_blank" rel="noopener noreferrer">IDictionary<span id="LST1841A9A1_16" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TKey, TValue<span id="LST1841A9A1_17" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
             </p></li><li><p>
               The adapters are "views" over the same tree and are cheap to construct.  In particular, they allow to convert a "dictionary view"
               of the tree to a "set view", thus allowing for efficient set-operations over dictionaries.
-            </p></li><li><p><a href="c8c6d6e7-69af-0deb-d35a-009763601fad.htm">TreeIterator<span id="LST1841A9A1_10" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TValue<span id="LST1841A9A1_11" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+            </p></li><li><p><a href="c8c6d6e7-69af-0deb-d35a-009763601fad.htm">TreeIterator<span id="LST1841A9A1_18" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_19" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
               allows position-based, non-recursive iteration over tree elements in sorted order.
             </p></li><li><p>
-              Traits-based design through static abstract interface methods that makes it easier to reuse components and, hopefully,
-              allows for better JIT optimizations (inlining).
-            </p></li><li><p>
-              Transparent: most algorithms are implemented as extension methods over <a href="d7256697-5f99-ad4c-267f-9bf3f263d6a7.htm">JoinableTreeNode<span id="LST1841A9A1_12" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TValue<span id="LST1841A9A1_13" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
-            </p></li></ul></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Other Resources</h4><div><a href="53289bc2-9d25-4ef4-9f8e-ecb5de16a84a.htm">Getting started sample</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Introduction to persistent data structures</a></li><li><a class="quickLink">Introduction to augmented search trees</a></li><li><a class="quickLink">Framework features</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div></div><script>$(function(){
+              Transparent: most algorithms are implemented as extension methods over <a href="2b3abad8-b773-065a-24c2-06bd9497d693.htm">TreeJoin<span id="LST1841A9A1_20" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_21" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+              and <a href="c8c6d6e7-69af-0deb-d35a-009763601fad.htm">TreeIterator<span id="LST1841A9A1_22" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_23" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+            </p></li></ul></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Quick start</h2><div id="IDGABSection"><p>
+          Main types are <a href="ee28f395-c4a0-7f0a-72a5-eb6652b34d1e.htm">AvlJoin<span id="LST1841A9A1_24" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_25" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a> and
+          <a href="294ba660-f71f-69fa-2845-5244c4ea60d7.htm">WBJoin<span id="LST1841A9A1_26" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST1841A9A1_27" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.  An example of creating
+          a standard collection of integers:
+        </p><div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-csharp">var coll = AvlJoin&lt;int&gt;.NewCollection(Comparer&lt;int&gt;.Default);</code></pre></div></div><p>
+          Other collection factory methods are available through static extension methods in <a href="5b642859-4854-84a8-3cf4-17f6c73d5979.htm">JoinableAvlTreeCollectionFactory</a>
+          and <a href="83112b47-c8dd-39fd-a419-fc54eeb8e7fc.htm">JoinableWBTreeCollectionFactory</a>
+          classes.  Collection conversions and non-destructive set operations are available through instance extension methods in
+          <a href="284fe464-b0b1-fb5b-566b-0846729d89a7.htm">AdaptedJoinableTreeExtensions</a> class.
+        </p><p>
+          See the source code in benchmark and test projects for further usage examples.
+        </p></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Introduction to persistent data structures</a></li><li><a class="quickLink">Introduction to augmented search trees</a></li><li><a class="quickLink">Framework features</a></li><li><a class="quickLink">Quick start</a></li></ul></nav></div></div></div></div><script>$(function(){
 SetDefaultLanguage("cs");
 LoadTocFile(null, null);
 InitializeQuickLinks();
@@ -79,4 +92,5 @@ $(".toggleSection" ).click(function () {
 $(".toggleSection").keypress(function () {
     SectionExpandCollapseCheckKey(this, event)
 });
+hljs.highlightAll();
 });</script></body></html>

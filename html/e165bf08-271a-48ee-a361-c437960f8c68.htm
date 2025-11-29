@@ -12,7 +12,7 @@
           Files in the following directories:
         </p><ul class="noBullet"><li><p><span class="code">Podaga.JoinableTree</span></p></li><li><p><span class="code">Podaga.SimdSort</span></p></li><li><p><span class="code">Podaga.Test</span></p></li><li><p><span class="code">Podaga.Benchmark</span></p></li></ul><p>
           are covered by <strong>MPL-2.0 License</strong><br />
-          Copyright (c) 2025 Stian Z. Vrba
+          Copyright (c) 2025-2026 Stian Z. Vrba
         </p><p>
           This Source Code Form is subject to the terms of the Mozilla Public
           License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,7 +26,11 @@
           <span class="code">BenchmarkResults</span> directory.  The Excel workbook uses <strong>Power Query</strong> to load
           data and it requires that the <em>absolute</em> path to the data being loaded is specified.  Consequently,  if you
           want to re-run benchmarks on your hardware, you will have to adjust those paths.
-        </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Version history</h2><div id="IDFABSection"><dl><dt>2025-06-01</dt><dd><p>Initial release.</p></dd></dl></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Getting started</a></li><li><a class="quickLink">Computer source code license</a></li><li><a class="quickLink">Documentation license</a></li><li><a class="quickLink">About benchmarks</a></li><li><a class="quickLink">Version history</a></li></ul></nav></div></div></div></div><script>$(function(){
+        </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Version history</h2><div id="IDFABSection"><dl><dt>2025-12-01</dt><dd><p>
+              Major (incompatible) API updates:
+            </p><ul><li><p>All libraries are now targetting only net10.</p></li><li><p><strong>JoinableTree</strong> framework is now based on the standard <span class="code">IComparer&lt;T&gt;</span>
+                  interface and comes with additional adapters to further simplify use.
+                </p></li></ul></dd><dt>2025-06-01</dt><dd><p>Initial release.</p></dd></dl></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Getting started</a></li><li><a class="quickLink">Computer source code license</a></li><li><a class="quickLink">Documentation license</a></li><li><a class="quickLink">About benchmarks</a></li><li><a class="quickLink">Version history</a></li></ul></nav></div></div></div></div><script>$(function(){
 SetDefaultLanguage("cs");
 LoadTocFile(null, null);
 InitializeQuickLinks();
