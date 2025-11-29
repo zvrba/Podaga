@@ -1,39 +1,39 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace Podaga.JoinableTree;
+namespace Podaga.JoinableTree.CollectionAdapters;
 
 /// <summary>
 /// Adapts a joinable tree to <see cref="IDictionary{TKey, TValue}"/> and <see cref="IReadOnlyDictionary{TKey, TValue}"/>.
 /// </summary>
 /// <typeparam name="TKey">Dictionary key type.</typeparam>
 /// <typeparam name="TValue">Dictionary value type.</typeparam>
-/// <typeparam name="TJoin">Tree join strategy.</typeparam>
-public class DictionaryTreeAdapter<TKey, TValue, TJoin> :
-    CollectionTreeAdapter<KeyValuePair<TKey, TValue>, TJoin>,
+public sealed class DictionaryTreeAdapter<TKey, TValue> :
+    CollectionTreeAdapter<KeyValuePair<TKey, TValue>>,
     IDictionary<TKey, TValue>,
     IReadOnlyDictionary<TKey, TValue>
-    where TJoin : struct, ITreeTraits<KeyValuePair<TKey, TValue>>
 {
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    /// <param name="root">Tree root from an existing tree, or <c>null</c> to initialize an empty set.</param>
-    /// <param name="transient">Transient tag to reuse, or 0 to create a new one.</param>
-    public DictionaryTreeAdapter(JoinableTreeNode<KeyValuePair<TKey, TValue>>? root = null, ulong transient = 0)
-        : base(root, transient) { }
+    /// <inheritdoc/>
+    public DictionaryTreeAdapter(TreeJoin<KeyValuePair<TKey, TValue>> join, JoinableTreeNode<KeyValuePair<TKey, TValue>>? root)
+        : base(join, root) { }
+
+    /// <inheritdoc/>
+    protected override CollectionTreeAdapter<KeyValuePair<TKey, TValue>> CreateInstance(TreeJoin<KeyValuePair<TKey, TValue>> join, JoinableTreeNode<KeyValuePair<TKey, TValue>>? root) =>
+        new DictionaryTreeAdapter<TKey, TValue>(join, root);
+
+    /// <inheritdoc/>
+    public new DictionaryTreeAdapter<TKey, TValue> Clone(bool immediate) => (DictionaryTreeAdapter<TKey, TValue>)base.Clone(immediate);
 
     /// <inheritdoc/>
     public TValue this[TKey key] {
         get => TryGetValue(key, out var value) ? value : throw new KeyNotFoundException($"Key `{key}` was not found in the dictionary.");
         set {
             var kv = new KeyValuePair<TKey, TValue>(key, value);
-            var n = Root.Find<KeyValuePair<TKey, TValue>, TJoin>(kv, out var found);
+            var n = Transient.Find(Root, kv, out var found);
             if (n != null && found == 0) n.Value = kv;
             else Add(kv);
         }
@@ -61,7 +61,7 @@ public class DictionaryTreeAdapter<TKey, TValue, TJoin> :
 
     /// <inheritdoc/>
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value) {
-        var n = Root.Find<KeyValuePair<TKey, TValue>, TJoin>(new KeyValuePair<TKey, TValue>(key, default!), out var found);
+        var n = Transient.Find(Root, new KeyValuePair<TKey, TValue>(key, default!), out var found);
         if (n != null && found == 0) {
             value = n.Value.Value;
             return true;
@@ -75,7 +75,7 @@ public class DictionaryTreeAdapter<TKey, TValue, TJoin> :
         private static readonly Exception ReadonlyExn = new NotSupportedException($"{typeof(IView<TSelf, T>).FullName} is read-only.");
 
         abstract static T Extract(KeyValuePair<TKey, TValue> kv);
-        DictionaryTreeAdapter<TKey, TValue, TJoin> Base { get; }
+        DictionaryTreeAdapter<TKey, TValue> Base { get; }
 
         int ICollection<T>.Count => Base.Count;
         bool ICollection<T>.IsReadOnly => true;
@@ -104,9 +104,9 @@ public class DictionaryTreeAdapter<TKey, TValue, TJoin> :
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TKey Extract(KeyValuePair<TKey, TValue> kv) => kv.Key;
 
-        internal KeyView(DictionaryTreeAdapter<TKey, TValue, TJoin> @base) => Base = @base;
+        internal KeyView(DictionaryTreeAdapter<TKey, TValue> @base) => Base = @base;
 
-        public DictionaryTreeAdapter<TKey, TValue, TJoin> Base { get; }
+        public DictionaryTreeAdapter<TKey, TValue> Base { get; }
     }
 
     private class ValueView : IView<ValueView, TValue>
@@ -114,8 +114,8 @@ public class DictionaryTreeAdapter<TKey, TValue, TJoin> :
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TValue Extract(KeyValuePair<TKey, TValue> kv) => kv.Value;
 
-        internal ValueView(DictionaryTreeAdapter<TKey, TValue, TJoin> @base) => Base = @base;
+        internal ValueView(DictionaryTreeAdapter<TKey, TValue> @base) => Base = @base;
 
-        public DictionaryTreeAdapter<TKey, TValue, TJoin> Base { get; }
+        public DictionaryTreeAdapter<TKey, TValue> Base { get; }
     }
 }

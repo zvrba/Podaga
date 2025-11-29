@@ -1,8 +1,9 @@
 ﻿using System;
+using Podaga.JoinableTree.CollectionAdapters;
 using BenchmarkDotNet.Attributes;
-using IntTree;
 
 using Podaga.Benchmark;
+using System.Collections.Generic;
 
 namespace Podaga.JoinableTree.Benchmark;
 
@@ -14,8 +15,8 @@ public class TreeFindBenchmark
     private readonly int[] data = new int[Size];
     private System.Collections.Generic.SortedSet<int> sortedSet;
     private System.Collections.Immutable.ImmutableSortedSet<int> immTree;
-    private CollectionTreeAdapter<int, AvlIntTree> avlTreeSet = new();
-    private CollectionTreeAdapter<int, WBIntTree> wbTreeSet = new();
+    private CollectionTreeAdapter<int> avlTreeSet = AvlJoin<int>.NewCollection(Comparer<int>.Default); 
+    private CollectionTreeAdapter<int> wbTreeSet = WBJoin<int>.NewCollection(Comparer<int>.Default);
 
 #if false
     private Pfm.Collections.JoinTree.JoinTree<int, ImplementationBenchmark.MutableTraits,

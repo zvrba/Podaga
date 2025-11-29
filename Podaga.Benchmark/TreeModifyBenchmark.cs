@@ -1,10 +1,11 @@
 ﻿using System;
+using Podaga.JoinableTree.CollectionAdapters;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Diagnostics.Windows;
-using IntTree;
 
 using Podaga.Benchmark;
+using System.Collections.Generic;
 
 namespace Podaga.JoinableTree.Benchmark;
 
@@ -22,25 +23,21 @@ public class TreeModifyBenchmark
         PermutationGenerators.Random(data);
     }
 
-    #region ICollection adapter
-
     [Benchmark]
     public void AvlTree() {
-        var tree = new CollectionTreeAdapter<int, AvlIntTree>();
+        var tree = AvlJoin<int>.NewCollection(Comparer<int>.Default);
         for (int i = 0; i < data.Length; ++i)
             tree.Add(data[i]);
         for (int i = data.Length - 1; i >= 0; --i)
             tree.Remove(data[i]);
     }
 
-    #endregion
-
     [GlobalSetup]
     public void GlobalSetup() => CoreSelector.SetAffinity();
 
     [Benchmark]
     public void WBTree() {
-        var tree = new CollectionTreeAdapter<int, WBIntTree>();
+        var tree = WBJoin<int>.NewCollection(Comparer<int>.Default);
         for (int i = 0; i < data.Length; ++i)
             tree.Add(data[i]);
         for (int i = data.Length - 1; i >= 0; --i)
@@ -49,34 +46,34 @@ public class TreeModifyBenchmark
 
     [Benchmark]
     public void AvlTreeCOW() {
-        var tree = new CollectionTreeAdapter<int, AvlIntTree>();
+        var tree = AvlJoin<int>.NewCollection(Comparer<int>.Default);
         for (int i = 0; i < data.Length; ++i)
             if ((data[i] & 1) == 1)
                 tree.Add(data[i]);
 
-        tree = tree.Fork(false);
+        tree = tree.Clone(false);
         for (int i = 0; i < data.Length; ++i)
             if ((data[i] & 1) == 0)
                 tree.Add(data[i]);
 
-        tree = tree.Fork(false);
+        tree = tree.Clone(false);
         for (int i = data.Length - 1; i >= 0; --i)
             tree.Remove(data[i]);
     }
 
     [Benchmark]
     public void WBTreeCOW() {
-        var tree = new CollectionTreeAdapter<int, WBIntTree>();
+        var tree = WBJoin<int>.NewCollection(Comparer<int>.Default);
         for (int i = 0; i < data.Length; ++i)
             if ((data[i] & 1) == 1)
                 tree.Add(data[i]);
 
-        tree = tree.Fork(false);
+        tree = tree.Clone(false);
         for (int i = 0; i < data.Length; ++i)
             if ((data[i] & 1) == 0)
                 tree.Add(data[i]);
 
-        tree = tree.Fork(false);
+        tree = tree.Clone(false);
         for (int i = data.Length - 1; i >= 0; --i)
             tree.Remove(data[i]);
     }

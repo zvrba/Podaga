@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Podaga.JoinableTree.CollectionAdapters;
 using BenchmarkDotNet.Attributes;
-using IntTree;
 
 namespace Podaga.JoinableTree.Benchmark;
 
@@ -10,7 +10,7 @@ public class SequencePatternBenchmark
 
     [Benchmark]
     public void TreeBenchmark() {
-        var coll = new CollectionTreeAdapter<int, AvlIntTree>();
+        var coll = AvlJoin<int>.NewCollection(Comparer<int>.Default); //new CollectionTreeAdapter<int, AvlIntTree>();
         for (int i = 0; i < AddPermutation.Data.Length; ++i)
             coll.Add(AddPermutation.Data[i]);
         for (int i = 0; i < RemovePermutation.Data.Length; ++i)

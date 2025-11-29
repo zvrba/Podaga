@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Podaga.JoinableTree;
@@ -6,7 +7,8 @@ namespace Podaga.JoinableTree;
 /// <summary>
 /// <para>
 /// Provides iterative tree navigation algorithms.  At its core, this struct implements a stack, whereas the actual
-/// algorithms are implemented as extension methods on <see cref="IteratorAlgorithms"/> class.
+/// algorithms are implemented as extension methods on <see cref="TreeIteratorAlgorithms"/> class.  The "current"
+/// node being traversed is always on top of the stack.
 /// </para>
 /// </summary>
 /// <remarks>
@@ -29,8 +31,8 @@ namespace Podaga.JoinableTree;
 /// For deep copying, use the copy constructor.
 /// </para>
 /// </remarks>
-/// <typeparam name="TValue">Value type held by tree nodes.</typeparam>
-public struct TreeIterator<TValue>
+/// <typeparam name="T">Value type held by tree nodes.</typeparam>
+public struct TreeIterator<T>
 {
     /// <summary>
     /// Default capacity allocated by the stack.  This should be sufficient for any balanced tree of up to 4G elements.
@@ -40,15 +42,18 @@ public struct TreeIterator<TValue>
     /// <summary>
     /// Utility method to create a new allocated instance with default capacity.
     /// </summary>
-    /// <returns>A new instance with <see cref="DefaultCapacity"/>.</returns>
-    public static TreeIterator<TValue> New() => new(DefaultCapacity);
+    /// <returns>A new instance with <paramref name="comparer"/> and <see cref="DefaultCapacity"/>.</returns>
+    /// <seealso cref="TreeIterator{T}.TreeIterator(IComparer{T}, int)"/>
+    public static TreeIterator<T> New(IComparer<T> comparer) => new(comparer, DefaultCapacity);
 
     /// <summary>
     /// Constructor.  Allocates space for <paramref name="capacity"/> nodes.
     /// </summary>
+    /// <param name="comparer">Comparer used to navigate the tree.</param>
     /// <param name="capacity">Maximum capacity supported by this stack.</param>
-    public TreeIterator(int capacity) {
-        Path = new JoinableTreeNode<TValue>[capacity];
+    public TreeIterator(IComparer<T> comparer, int capacity) {
+        Comparer = comparer;
+        Path = new JoinableTreeNode<T>[capacity];
         Depth = 0;
     }
 
@@ -59,18 +64,24 @@ public struct TreeIterator<TValue>
     /// <param name="other">
     /// An existing instance from which to initialize <c>this</c>.
     /// </param>
-    public TreeIterator(TreeIterator<TValue> other) {
+    public TreeIterator(TreeIterator<T> other) {
+        Comparer = other.Comparer;
         Depth = other.Depth;
-        Path = new JoinableTreeNode<TValue>[other.Path.Length];
+        Path = new JoinableTreeNode<T>[other.Path.Length];
         Array.Copy(other.Path, Path, Depth);
     }
+
+    /// <summary>
+    /// Comparer used to navigate the tree.
+    /// </summary>
+    public readonly IComparer<T> Comparer;
 
     /// <summary>
     /// Tree traversal stack; root is always at index 0 (bottom) and the current node at <c>Count-1</c>.
     /// </summary>
     /// <seealso cref="Top"/>
     /// <seealso cref="Depth"/>
-    public readonly JoinableTreeNode<TValue>[] Path;
+    public readonly JoinableTreeNode<T>[] Path;
 
     /// <summary>
     /// Number of elements on the stack.
@@ -90,7 +101,7 @@ public struct TreeIterator<TValue>
     /// <summary>
     /// A reference to the top node on the stack which is at index <c>Count - 1</c>.
     /// </summary>
-    public readonly ref JoinableTreeNode<TValue> Top => ref Path[Depth - 1];
+    public readonly ref JoinableTreeNode<T> Top => ref Path[Depth - 1];
 
     /// <summary>
     /// Removes all elements from the stack.
@@ -102,7 +113,7 @@ public struct TreeIterator<TValue>
     /// Pushes a node onto the stack.  <paramref name="node"/> must not be null (checked only in debug builds).
     /// </summary>
     /// <param name="node"></param>
-    public void Push(JoinableTreeNode<TValue> node) {
+    public void Push(JoinableTreeNode<T> node) {
         Debug.Assert(node != null);
         Path[Depth++] = node;
     }
@@ -113,5 +124,5 @@ public struct TreeIterator<TValue>
     /// <returns>
     /// The popped node or <c>null</c> if the stack was empty.
     /// </returns>
-    public JoinableTreeNode<TValue> TryPop() => Depth > 0 ? Path[--Depth] : null;
+    public JoinableTreeNode<T>? TryPop() => Depth > 0 ? Path[--Depth] : null;
 }

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Podaga.JoinableTree;
+
+using System;
 using System.Collections.Generic;
-
-using IntTree;
-
-using Podaga.Test;
 
 namespace Podaga.Test;
 
@@ -12,19 +10,25 @@ public static class Program
     const int SequenceSize = 384;
 
     public static void Main() {
-        for (var i = 4; i < 32; ++i) {
+
+#if false
+        for (var i = 4; i < 24; ++i) {
             Console.WriteLine($"Checking sorting network for N={i}");
             SimdSort_Test.CheckInt(i);
         }
-#if false
+#endif
+
+#if true
         // NB! Running time grows at least quadratically with element count.
         var sequences = GetSequences(SequenceSize);
+        var avljoin = new AvlJoin<int>(Comparer<int>.Default);
+        var wbjoin = new WBJoin<int>(Comparer<int>.Default);
 
-        TreeSet_BasicTest<AvlIntTree>.Run(sequences);
-        TreeSet_SetTest<AvlIntTree>.Run(SequenceSize);
+        TreeSet_BasicTest.Run(avljoin, sequences);
+        TreeSet_SetTest.Run(avljoin, SequenceSize);
         
-        TreeSet_BasicTest<WBIntTree>.Run(sequences);
-        TreeSet_SetTest<WBIntTree>.Run(SequenceSize);
+        TreeSet_BasicTest.Run(wbjoin, sequences);
+        TreeSet_SetTest.Run(wbjoin, SequenceSize);
 #endif
     }
 

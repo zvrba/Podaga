@@ -1,93 +1,100 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Podaga.JoinableTree;
 
 /// <summary>
-/// Implementation of <see cref="ITreeTraits{TValue}"/> for AVL trees.
+/// Implementation of <see cref="TreeJoin{T}"/> for AVL trees.
 /// </summary>
-/// <typeparam name="TSelf">The most-derived type implementing this interface (CRTP pattern).</typeparam>
-/// <typeparam name="TValue">Tree element type.</typeparam>
-public interface IAvlJoin<TSelf, TValue> : ITreeTraits<TValue>
-    where TSelf : struct, IAvlJoin<TSelf, TValue>
+/// <typeparam name="T">Value type stored in the tree.</typeparam>
+public sealed class AvlJoin<T> : TreeJoin<T>
 {
+    /// <inheritdoc/>
+    public AvlJoin(IComparer<T> comparer) : base(comparer)
+    {
+        RZero = 0;
+    }
+
+    /// <inheritdoc/>
+    public override TreeJoin<T> Clone() => new AvlJoin<T>(Comparer);
+
+    /// <inheritdoc/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public override int RPlus(int left, int right) => 1 + (left > right ? left : right);
+
     // UTILITIES
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int H(JoinableTreeNode<TValue> n) => n?.Rank ?? 0;
+    private static int H(JoinableTreeNode<T>? n) => n?.Rank ?? 0;
 
     /// <inheritdoc/>
-    static int ITreeTraits<TValue>.NilRank => 0;
-
-    /// <inheritdoc/>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static int ITreeTraits<TValue>.CombineRanks(int left, int middle, int right) => 1 + (left > right ? left : right);
-
-    /// <inheritdoc/>
-    static JoinableTreeNode<TValue> ITreeTraits<TValue>.Join(TreeSection<TValue> jd)
-    {
+    public override JoinableTreeNode<T> Join(Section jd) {
         if (H(jd.Left) > H(jd.Right) + 1)
             return JoinR(jd);
         if (H(jd.Right) > H(jd.Left) + 1)
             return JoinL(jd);
-        return jd.JoinBalanced<TSelf>();
+        return JoinBalanced(jd);
     }
 
-    static void ITreeTraits<TValue>.ValidateStructure(JoinableTreeNode<TValue> node) => ValidateHeights(node);
+    /// <inheritdoc/>
+    public override void ValidateStructure(JoinableTreeNode<T>? node) => ValidateHeights(node);
 
     // Search along the right spine of tl ...
-    private static JoinableTreeNode<TValue> JoinR(TreeSection<TValue> jd)
+    private JoinableTreeNode<T> JoinR(Section jd)
     {
-        var tl = jd.Left;
+        var tl = jd.Left!;
         var (l, c) = (tl.Left, tl.Right);
         if (H(c) <= H(jd.Right) + 1) {
             jd.Left = c;
-            var t1 = jd.JoinBalanced<TSelf>();
-            tl = tl.Clone<TSelf>(jd.Transient);
+            var t1 = JoinBalanced(jd);
+            tl = tl.Clone(this);
             tl.Right = t1;
-            tl.Update<TSelf>();
+            tl.Update(this);
             if (t1.Rank > H(l) + 1)
-                tl = tl.RotLL<TValue, TSelf>(jd.Transient);
+                tl = this.RotLL(tl);
         } else {
             jd.Left = c;
             var t1 = JoinR(jd);
-            tl = tl.Clone<TSelf>(jd.Transient);
+            tl = tl.Clone(this);
             tl.Right = t1;
-            tl.Update<TSelf>();
+            tl.Update(this);
             if (t1.Rank > H(l) + 1)
-                tl = tl.RotL<TValue, TSelf>(jd.Transient);
+                tl = this.RotL(tl);
         }
         return tl;
     }
 
     // Search along the left spine of tr...
-    private static JoinableTreeNode<TValue> JoinL(TreeSection<TValue> jd)
+    private JoinableTreeNode<T> JoinL(Section jd)
     {
-        var tr = jd.Right;
+        var tr = jd.Right!;
         var (c, r) = (tr.Left, tr.Right);
         if (H(c) <= H(jd.Left) + 1) {
             jd.Right = c;
-            var t1 = jd.JoinBalanced<TSelf>();
-            tr = tr.Clone<TSelf>(jd.Transient);
+            var t1 = JoinBalanced(jd);
+            tr = tr.Clone(this);
             tr.Left = t1;
-            tr.Update<TSelf>();
+            tr.Update(this);
             if (t1.Rank > H(r) + 1)
-                tr = tr.RotRR<TValue, TSelf>(jd.Transient);
+                tr = this.RotRR(tr);
         } else {
             jd.Right = c;
             var t1 = JoinL(jd);
-            tr = tr.Clone<TSelf>(jd.Transient);
+            tr = tr.Clone(this);
             tr.Left = t1;
-            tr.Update<TSelf>();
+            tr.Update(this);
             if (t1.Rank > H(r) + 1)
-                tr = tr.RotR<TValue, TSelf>(jd.Transient);
+                tr = this.RotR(tr);
         }
         return tr;
     }
 
-    private static int ValidateHeights(JoinableTreeNode<TValue> node) {
+    private static int ValidateHeights(JoinableTreeNode<T>? node)
+    {
         if (node == null)
             return 0;
+
         var l = ValidateHeights(node.Left);
         var r = ValidateHeights(node.Right);
         var h = 1 + (l > r ? l : r);

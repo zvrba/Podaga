@@ -1,26 +1,32 @@
 ﻿using System;
 using Podaga.JoinableTree;
+using Podaga.JoinableTree.CollectionAdapters;
 
 namespace Podaga.Test;
 
 // Tests set operations.  Must be used only with immutable nodes!
-internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>
+internal class TreeSet_SetTest
 {
-    public static void Run(int size) {
+    public static void Run(TreeJoin<int> join, int size) {
         if ((size & 1) == 1)  // Make it even to simplify tests.
             ++size;
-        var test = new TreeSet_SetTest<TTree>(size);
+        var test = new TreeSet_SetTest(join, size);
         test.Run();
     }
 
     private readonly int size;
-    private readonly SetTreeAdapter<int, TTree> empty = new();
-    private readonly SetTreeAdapter<int, TTree> numbers = new();
-    private readonly SetTreeAdapter<int, TTree> evens = new();
-    private readonly SetTreeAdapter<int, TTree> odds = new();
+    private readonly SetTreeAdapter<int> empty;
+    private readonly SetTreeAdapter<int> numbers;
+    private readonly SetTreeAdapter<int> evens;
+    private readonly SetTreeAdapter<int> odds;
 
-    private TreeSet_SetTest(int size) {
+    private TreeSet_SetTest(TreeJoin<int> join, int size) {
         this.size = size;
+        this.empty = new(join, null);
+        this.numbers = new(join, null);
+        this.evens = new(join, null);
+        this.odds = new(join, null);
+
         for (int i = 0; i < size; ++i) {
             numbers.Add(i);
             if (i % 2 == 0) evens.Add(i);
@@ -30,17 +36,17 @@ internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>
 
     private class AssertArgumentsPreserved : IDisposable
     {
-        private readonly object[] checkpreserveroots;
-        private readonly SetTreeAdapter<int, TTree>[] checkpreserve;
-        private readonly SetTreeAdapter<int, TTree>[] preservecopy;
+        private readonly object?[] checkpreserveroots;
+        private readonly SetTreeAdapter<int>[] checkpreserve;
+        private readonly SetTreeAdapter<int>[] preservecopy;
 
-        public AssertArgumentsPreserved(params SetTreeAdapter<int, TTree>[] trees) {
+        public AssertArgumentsPreserved(params SetTreeAdapter<int>[] trees) {
             checkpreserve = trees;
             checkpreserveroots = new object[trees.Length];
-            preservecopy = new SetTreeAdapter<int, TTree>[trees.Length];
+            preservecopy = new SetTreeAdapter<int>[trees.Length];
             for (int i = 0; i < trees.Length; ++i) {
                 checkpreserveroots[i] = trees[i].Root;
-                preservecopy[i] = trees[i].Fork(true).AsSet();
+                preservecopy[i] = trees[i].Clone(true).AsSet();
                 Assert.True((trees[i].Root == null && preservecopy[i].Root == null) || preservecopy[i].Root != trees[i].Root);
             }
         }
@@ -95,7 +101,7 @@ internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>
         }
 
         using (var a = new AssertArgumentsPreserved(odds)) {
-            var s1 = evens.Fork(false).AsSet();
+            var s1 = evens.Clone(false).AsSet();
             s1.UnionWith(odds);
             Assert.True(numbers.SetEquals(s1));
         }
@@ -118,7 +124,7 @@ internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>
         }
 
         using (var a = new AssertArgumentsPreserved(numbers)) {
-            var s1 = odds.Fork(false).AsSet();
+            var s1 = odds.Clone(false).AsSet();
             s1.IntersectWith(numbers);
             Assert.True(odds.SetEquals(s1));
         }
@@ -143,7 +149,7 @@ internal class TreeSet_SetTest<TTree> where TTree : struct, ITreeTraits<int>
         }
 
         using (var a = new AssertArgumentsPreserved(evens)) {
-            var s1 = numbers.Fork(false).AsSet();
+            var s1 = numbers.Clone(false).AsSet();
             s1.ExceptWith(evens);
             Assert.True(odds.SetEquals(s1));
         }
