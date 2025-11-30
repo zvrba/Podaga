@@ -10,7 +10,7 @@ namespace Podaga.Benchmark;
 [GcServer(true)]
 [XmlExporterAttribute.Brief]
 [XmlExporter(fileNameSuffix: "xml", indentXml: true, excludeMeasurements: true)]
-[HardwareCounters(HardwareCounter.InstructionRetired, HardwareCounter.CacheMisses, HardwareCounter.BranchInstructionRetired)]
+//[HardwareCounters(HardwareCounter.InstructionRetired, HardwareCounter.CacheMisses, HardwareCounter.BranchInstructionRetired)]
 public class IntSortBenchmark
 {
     private const int MaxSize = 1048576;
