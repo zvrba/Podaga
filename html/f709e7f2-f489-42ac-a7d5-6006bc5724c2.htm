@@ -39,13 +39,13 @@
               It is much more efficient to load <span class="code">ref</span> parameters into locals at the beginning
               of the procedure and store results at the end.
             </p></li></ul><p>
-          Performance results have been obtained on <strong>.NET9</strong> platform and are presented in <strong>IntSort</strong>
+          Performance results have been obtained on <strong>.NET10</strong> platform and are presented in <strong>IntSort</strong>
           sheet of the attached Excel workbook.  Points below summarize the main findings.
-        </p><ul class="noBullet"><li><p><strong>BenchmarkDotNet</strong> still (April 2025) does not support "additive baseline",
+        </p><ul class="noBullet"><li><p><strong>BenchmarkDotNet</strong> still (December 2025) does not support "additive baseline",
               so numbers have been adjusted accordingly wrt. <strong>AdditiveBaseline</strong> benchmark.
             </p><p>
-              For arrays of "intermediate" size (256 to 1M elements), the speedup is between 1x and 4x.  Peak speedups are achieved
-              between 4k and 64k elements.
+              For arrays of "intermediate" size (256 to 1M elements), the speedup is between 1x and 5.5x.  Peak speedups are achieved
+              between 4k and 16k elements.
             </p><p>
               For small arrays (up to 256 elements), the speedup is unpredictable: network sort might be either faster or slower.
               This is most probably due to high latency of AVX2 masked load and store instructions. (The sorting network uses masked
