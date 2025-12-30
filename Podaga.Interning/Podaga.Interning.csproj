@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Podaga - Interning</Title>
+    <Authors>Stian Z. Vrba (zvrba)</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>D:\Podaga\PodagaSigningKey.pub.snk</AssemblyOriginatorKeyFile>
+    <Product>Podaga</Product>
+    <Description>
+      This library provides abstractions for "interning", i.e., "monocopy", i.e., "hash-consing".  Of concrete types, it provides
+      WeakHash and InternableList.  WeakHash stores weak references to objects, whereas InternableList implements a list with
+      small-storage optimization, deep equality and ability to be interned.
+      Introductory and API documentation is available at https://zvrba.github.io/Podaga/html/e165bf08-271a-48ee-a361-c437960f8c68.htm
+    </Description>
+    <Copyright>(c) 2026 Stian Z. Vrba</Copyright>
+    <PackageProjectUrl>https://github.com/zvrba/Podaga</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
+    <PackageTags>hash;weak;hashing;weak-hash;monocopy;interning;hash-consing;data-structures;memoization</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+    <DelaySign>True</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe&quot; -Rca $(TargetPath) PodagaKeyContainer" />
+  </Target>
+
+</Project>

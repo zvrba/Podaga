@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podaga.Benchmark", "Podaga.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podaga.Test", "Podaga.Test\Podaga.Test.csproj", "{117033B2-E48C-6EB1-2BC2-3A2A87907AEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podaga.Interning", "Podaga.Interning\Podaga.Interning.csproj", "{556CC2DE-2B99-9802-B57F-1A77E4814531}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,14 @@ Global
 		{117033B2-E48C-6EB1-2BC2-3A2A87907AEB}.Release|Any CPU.Build.0 = Release|x64
 		{117033B2-E48C-6EB1-2BC2-3A2A87907AEB}.Release|x64.ActiveCfg = Release|x64
 		{117033B2-E48C-6EB1-2BC2-3A2A87907AEB}.Release|x64.Build.0 = Release|x64
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Debug|x64.Build.0 = Debug|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Release|x64.ActiveCfg = Release|Any CPU
+		{556CC2DE-2B99-9802-B57F-1A77E4814531}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
