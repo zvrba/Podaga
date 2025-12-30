@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Interning</title><meta name="Title" content="Interning" /><meta name="Help.Id" content="d63893d7-3606-4fa6-b80f-2cc0a324b135" /><meta name="Help.ContentType" content="Concepts" /><meta name="guid" content="d63893d7-3606-4fa6-b80f-2cc0a324b135" /><meta name="Description" content="This library provides a weak hash for interning objects and a simple mechanism for memoizing function results." /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><img src="../icons/Help.png" /></div><div id="DocumentationTitle" class="level-item">Podaga libraries</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Interning</h1><div><p>
+        This library provides a weak hash for interning objects and a simple mechanism for memoizing function results.
+      </p></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Memoization</h2><div id="IDDABSection"><p>
+          Memoization is caching of previously computed function results to speed up further computations.  In extreme cases,
+          it can exponentially reduce running times; for example recursive computation of Fibonacci numbers.  Memoization is
+          supported through two types: <a href="cd698b7d-02bf-067f-cb69-02d50008a9a4.htm">Memoize<span id="LST95A2019E_0" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TInput, TOutput<span id="LST95A2019E_1" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+          and <a href="e95759df-5d70-539d-e824-b06f850ba6f4.htm">Memoized<span id="LST95A2019E_2" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TInput, TOutput<span id="LST95A2019E_3" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+        </p><p>
+          The types seemingly support only functions with one argument and result, but this can be worked around by using
+          <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple" target="_blank" rel="noopener noreferrer">ValueTuple</a>.  Internally, <span class="code">Memoize</span>
+          uses a <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2" target="_blank" rel="noopener noreferrer">Dictionary<span id="LST95A2019E_4" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TKey, TValue<span id="LST95A2019E_5" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a> to store
+          previously computed results.  The same <span class="code">Memoize</span> instance can be used for multiple function exeuctions
+          and retains the results of all previous executions.
+        </p><p>
+          The snippet below exemplifies memoized recursive computation of Fibonacci numbers.  The memoization argument is called
+          <span class="code">recurse</span> because it allows the function to invoke itself recursively, but skipping computations
+          if the result is already cached.
+        </p><div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">Memoized Fibonacci</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-csharp">[Fact]
+public static void FibonacciTest()
+{
+    Memoize&lt;int, int&gt; memo = new(Fib);
+
+    var n5 = memo.Run(5);
+    Assert.Equal(8, n5);
+
+    var n6 = memo.Run(6);
+    Assert.Equal(13, n6);
+}
+
+private static int Fib(int n, Memoize&lt;int, int&gt; recurse)
+{
+    if (n &lt; 2)
+        return 1;
+
+    var n1 = recurse.Run(n - 1);
+    var n2 = recurse.Run(n - 2);
+    return n1 + n2;
+}</code></pre></div></div></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Interning</h2><div id="IDEABSection"><p>
+          Interning is applicable to types on which instance equality can be defined.  Given an object instance <span class="code">I</span>,
+          the <em>internator</em> checks whether an <em>equal</em> instance <span class="code">I'</span> is already
+          interned, and if so, it returns <span class="code">I'</span>.  Otherwise, it remembers <span class="code">I</span> and returns it.
+          Obviously, an object instance must become <em>immutable</em> after interning.
+        </p><p>
+          This library defines contract for internable values through three interfaces: <a href="fbf0bfb8-e988-0ad6-3f6d-6806f4488e80.htm">IInternator</a>,
+          <a href="c5ba644e-04e3-85f2-7372-69834a4a6301.htm">IInternable</a> and
+          <a href="faba7837-bd50-c877-edd0-b01c01144b83.htm">IInternable<span id="LST95A2019E_6" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TSelf<span id="LST95A2019E_7" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.  Because of subtleties
+          around implementing an internable type, <a href="bca5c447-cf6a-b011-b2eb-20513e0554b1.htm">AbstractInternable<span id="LST95A2019E_8" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TSelf<span id="LST95A2019E_9" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+          is provided as a base class.
+        </p><p>
+          Interning can be naively implemented with <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1" target="_blank" rel="noopener noreferrer">HashSet<span id="LST95A2019E_10" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_11" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
+          but the downside is that the hash-table is holding <em>strong</em> references to the stored objects, thus preventing otherwise
+          unused objects from being garbage-collected.  The library thus provides a <a href="d07a34ad-4b97-44b7-5c3a-17a9369ba8e4.htm">WeakHash</a>
+          implementation of <a href="fbf0bfb8-e988-0ad6-3f6d-6806f4488e80.htm">IInternator</a>.
+        </p><article class="message is-warning"><div class="message-header"><p><span class="icon"><i class="fa fa-warning"></i></span>  Important</p></div><div class="message-body"><p>
+            It is important to dispose <a href="d07a34ad-4b97-44b7-5c3a-17a9369ba8e4.htm">WeakHash</a> instance
+            when no longer needed.  Leakage of allocated <a href="https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.weakgchandle-1" target="_blank" rel="noopener noreferrer">WeakGCHandle<span id="LST95A2019E_12" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_13" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+            instances is nevertheless prevented by the finalizer.
+          </p></div></article><p><a href="d07a34ad-4b97-44b7-5c3a-17a9369ba8e4.htm">WeakHash</a> has the following characteristics:
+        </p><ul><li><p>
+              Implements open addressing with linear probing.  To improve collision-resistance, the internable object's <a href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode" target="_blank" rel="noopener noreferrer">GetHashCode</a>
+              method should "finalize" the hash by <a href="163d1023-40ac-582e-3e73-f8aab2713880.htm">Mix</a>.
+              Resize is triggered when when the load factor has exceeded 75%, and all allocated GC handles count towards the load factor.
+            </p></li><li><p>
+              Stores instances of <a href="https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.weakgchandle-1" target="_blank" rel="noopener noreferrer">WeakGCHandle<span id="LST95A2019E_14" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_15" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+              for the stored objects, without resurrection tracking.  (<a href="https://learn.microsoft.com/dotnet/api/system.weakreference-1" target="_blank" rel="noopener noreferrer">WeakReference<span id="LST95A2019E_16" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_17" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
+              is a wrapper around a <span class="code">GCHanlde</span>, but it incurs additional allocations because it's a reference type.)
+            </p></li><li><p>
+              Resizing triggers GC up to the 1st generation (using "Optimized" mode), and then counts surviving objects.  It is thus possible
+              that the table shrinks to a smaller capacity.  Additional memory used is the new capacity.
+            </p></li></ul><p>
+          Lastly, the library provides an <a href="ab7faaf0-da41-63e1-98d8-f473de4432d6.htm">InternableList<span id="LST95A2019E_18" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_19" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+          This type implements <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1" target="_blank" rel="noopener noreferrer">IList<span id="LST95A2019E_20" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_21" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a> as
+          follows:
+        </p><ul><li><p>
+              Small-storage optimization: up to <a href="5b40fbed-ffc7-3bb6-56ee-7c612545874d.htm">MaxSmallCount</a>
+              elements are stored "inline" with the class, thus reducing allocations.  When the number of elements exceeds the small count limit,
+              the implementation acts as a wrapper over a <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1" target="_blank" rel="noopener noreferrer">List<span id="LST95A2019E_22" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_23" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.
+            </p></li><li><p>
+              Deep equality of elements.  If the element type implements <a href="faba7837-bd50-c877-edd0-b01c01144b83.htm">IInternable<span id="LST95A2019E_24" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TSelf<span id="LST95A2019E_25" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
+              the elements are individually interned as well.
+            </p></li></ul></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Other Resources</h4><div><a href="https://en.wikipedia.org/wiki/Memoization" target="_blank" rel="noopener noreferrer">Wikipedia article on memoization</a></div><div><a href="https://en.wikipedia.org/wiki/Interning_(computer_science)" target="_blank" rel="noopener noreferrer">Wikipedia article on interning</a></div><div><a href="https://en.wikipedia.org/wiki/Hash_consing" target="_blank" rel="noopener noreferrer">Wikipedia article on "hash-consing"</a></div><div><a href="https://github.com/HashConser/Monocopy-Goto" target="_blank" rel="noopener noreferrer">Archived original article about "Monocopy LISP"</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Memoization</a></li><li><a class="quickLink">Interning</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script></body></html>
