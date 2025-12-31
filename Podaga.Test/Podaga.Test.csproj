@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Podaga.Interning\Podaga.Interning.csproj" />
     <ProjectReference Include="..\Podaga.JoinableTree\Podaga.JoinableTree.csproj" />
     <ProjectReference Include="..\Podaga.SimdSort\Podaga.SimdSort.csproj" />
   </ItemGroup>
