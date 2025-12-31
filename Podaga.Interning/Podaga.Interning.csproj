@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.0.1</VersionPrefix>
     <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>D:\Podaga\PodagaSigningKey.pub.snk</AssemblyOriginatorKeyFile>
@@ -32,7 +32,10 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
     <PackageTags>hash;weak;hashing;weak-hash;monocopy;interning;hash-consing;data-structures;memoization</PackageTags>
-    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      1.0.1: Make InternComposite protected.
+      1.0.0: Initial release.
+    </PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
     <DelaySign>True</DelaySign>

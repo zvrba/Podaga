@@ -46,7 +46,7 @@ public abstract class AbstractInternable<TSelf> : IInternable<TSelf>
     /// The default implementation is a no-op.
     /// </para>
     /// </summary>
-    public virtual void InternComposite(IInternator internator) { }
+    protected virtual void InternComposite(IInternator internator) { }
 
     /// <summary>
     /// Implements <see cref="IInternable{T}.Intern(IInternator)"/>.

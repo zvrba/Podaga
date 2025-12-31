@@ -131,7 +131,7 @@ public sealed class InternableList<T> : AbstractInternable<InternableList<T>>, I
     /// Interns every individual element when <typeparamref name="T"/> is internable; otherwise is a no-op.
     /// </summary>
     /// <param name="internator">Internator passed to <see cref="AbstractInternable{TSelf}.Intern(IInternator)"/>.</param>
-    public override void InternComposite(IInternator internator)
+    protected override void InternComposite(IInternator internator)
     {
         if (!TIsInternable)
             return;
