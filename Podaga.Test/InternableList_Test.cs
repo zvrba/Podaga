@@ -19,6 +19,7 @@ internal class InternableList_Test
         var rl = new List<int>();
     }
 
+    // Large storage delegates to List<int>, so we don't test that.
     private static void TestSmallStorage()
     {
         var il = new InternableList<int>();
@@ -30,6 +31,19 @@ internal class InternableList_Test
 
         Assert.Throws<ArgumentOutOfRangeException>(() => il.Insert(-1, -1));
         Assert.Throws<ArgumentOutOfRangeException>(() => il.Insert(il.Count + 1, -1));
+
+        il.Insert(0, -1);
+        il.Insert(il.Count, 4);
+        il.Insert(3, -2);
+        Assert.True(il.Equals([-1, 0, 1, -2, 2, 3, 4]));
+        Assert.True(BackingListProperty.GetValue(il) is null);
+
+        il.Add(il.Count);
+        il.Add(il.Count);
+        Assert.True(il.Count == 9 && BackingListProperty.GetValue(il) is not null);
+
+        Assert.True(il.Remove(12) == false);
+        Assert.True(il.Remove(8));
     }
 
 

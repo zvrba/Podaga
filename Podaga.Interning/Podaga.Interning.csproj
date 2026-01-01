@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionPrefix>1.0.3</VersionPrefix>
     <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>D:\Podaga\PodagaSigningKey.pub.snk</AssemblyOriginatorKeyFile>
@@ -33,6 +33,7 @@
     <RepositoryUrl>https://github.com/zvrba/Podaga</RepositoryUrl>
     <PackageTags>hash;weak;hashing;weak-hash;monocopy;interning;hash-consing;data-structures;memoization</PackageTags>
     <PackageReleaseNotes>
+1.0.3: Bugfixes.
 1.0.2: API improvements: add ObjectInternedException
 1.0.1: Make InternComposite protected.
 1.0.0: Initial release.

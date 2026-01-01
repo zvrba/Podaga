@@ -174,8 +174,8 @@ public sealed class InternableList<T> : AbstractInternable<InternableList<T>>, I
     {
         ThrowIfInterned();
         if (smallCount == MaxSmallCount) {
-            smallCount = 0;
             list = [.. this];
+            smallCount = 0;
         }
 
         if (list is not null) {
