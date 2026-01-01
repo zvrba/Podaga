@@ -56,3 +56,29 @@ public interface IInternable<TSelf> : IInternable, IEquatable<TSelf> // where TS
     /// </remarks>
     public TSelf Intern(IInternator internator);
 }
+
+/// <summary>
+/// Extension methods over <see cref="IInternable"/>.
+/// </summary>
+public static class InternableExtensions
+{
+    extension(IInternable internable)
+    {
+        /// <summary>
+        /// This property is true when the object has been interned (and has thus become immutable).
+        /// </summary>
+        public bool IsInterned => internable.InternCode.HasValue;
+
+
+        /// <summary>
+        /// Utility method to help with implementing mutable internable classes.  It should be invoked by every method that
+        /// affects equality.
+        /// </summary>
+        /// <exception cref="ObjectInternedException">Thrown when <see cref="IInternable.InternCode"/> has a value.</exception>
+        public void ThrowIfInterned()
+        {
+            if (internable.IsInterned)
+                throw new ObjectInternedException(internable);
+        }
+    }
+}

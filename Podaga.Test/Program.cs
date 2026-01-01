@@ -18,7 +18,7 @@ public static class Program
         }
 #endif
 
-#if true
+#if false
         // NB! Running time grows at least quadratically with element count.
         var sequences = GetSequences(SequenceSize);
         var avljoin = new AvlJoin<int>(Comparer<int>.Default);
@@ -30,6 +30,11 @@ public static class Program
         TreeSet_BasicTest.Run(wbjoin, sequences);
         TreeSet_SetTest.Run(wbjoin, SequenceSize);
 #endif
+
+#if true
+        InternableList_Test.Run();
+#endif
+
     }
 
     private static List<int[]> GetSequences(int max) {

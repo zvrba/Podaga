@@ -90,10 +90,7 @@ public abstract class AbstractInternable<TSelf> : IInternable<TSelf>
     /// Utility method to help with implementing mutable classes.  It should be invoked by every method that
     /// affects equality.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Thrown when <see cref="InternCode"/> has a value.</exception>
-    protected void ThrowIfInterned()
-    {
-        if (InternCode.HasValue)
-            throw new InvalidOperationException($"Cannot mutate an interned object {GetType().FullName}.");
-    }
+    /// <exception cref="ObjectDisposedException">Thrown when <see cref="InternCode"/> has a value.</exception>
+    /// <seealso cref="InternableExtensions.ThrowIfInterned(IInternable)"/>
+    protected void ThrowIfInterned() => InternableExtensions.ThrowIfInterned(this);
 }
