@@ -45,7 +45,8 @@ private static int Fib(int n, Memoize&lt;int, int&gt; recurse)
           <a href="c5ba644e-04e3-85f2-7372-69834a4a6301.htm">IInternable</a> and
           <a href="faba7837-bd50-c877-edd0-b01c01144b83.htm">IInternable<span id="LST95A2019E_6" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TSelf<span id="LST95A2019E_7" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>.  Because of subtleties
           around implementing an internable type, <a href="bca5c447-cf6a-b011-b2eb-20513e0554b1.htm">AbstractInternable<span id="LST95A2019E_8" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>TSelf<span id="LST95A2019E_9" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>
-          is provided as a base class.
+          is provided as a base class.  <a href="86a35843-17ec-817d-6f8b-fbf0a06b87a2.htm">InternableExtensions</a>
+          provides common utility methods.
         </p><p>
           Interning can be naively implemented with <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1" target="_blank" rel="noopener noreferrer">HashSet<span id="LST95A2019E_10" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LST95A2019E_11" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span></a>,
           but the downside is that the hash-table is holding <em>strong</em> references to the stored objects, thus preventing otherwise
