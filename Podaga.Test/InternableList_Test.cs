@@ -15,8 +15,6 @@ internal class InternableList_Test
     {
         InternedListModificationThrows();
         TestSmallStorage();
-
-        var rl = new List<int>();
     }
 
     // Large storage delegates to List<int>, so we don't test that.
@@ -43,7 +41,17 @@ internal class InternableList_Test
         Assert.True(il.Count == 9 && BackingListProperty.GetValue(il) is not null);
 
         Assert.True(il.Remove(12) == false);
-        Assert.True(il.Remove(8));
+        Assert.True(il.Remove(7));  // Some middle element (not first or last)
+        Assert.True(il.Count == 8 && BackingListProperty.GetValue(il) is null);
+        Assert.True(il.Equals([-1, 0, 1, -2, 2, 3, 4, 8]));
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => il.RemoveAt(-1));
+        Assert.Throws<ArgumentOutOfRangeException>(() => il.RemoveAt(8));
+
+        il.RemoveAt(0);
+        il.RemoveAt(il.Count - 1);
+        il.RemoveAt(3);
+        Assert.True(il.Equals([0, 1, -2, 3, 4]));
     }
 
 
